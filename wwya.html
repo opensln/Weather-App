@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Weather Where You Are - API</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		body {
+			box-sizing: border-box;
+			font-family: Georgia;
+
+		}
+
+
+
+
+		.weatherCol {
+			background-color: white;
+			border: solid 2px black;
+			text-align: center;
+		}
+
+		#cityRow {
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#mainlanding {
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 445px;
+			margin-top: -10px;
+			/* background-image: ; */
+
+		}
+
+		nav {
+			height: 55px;
+			background: rgba(255, 255, 255, 0.2);
+			color: white;
+		}
+
+		#localWeatherFrame {
+			height: 300px;
+			min-height: 300px;
+			border-radius: 5px;
+			box-shadow: 5px 10px 10px #888888;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 40px;
+			padding-top: 25px;
+			background-Image: url('img/Clear.jpg');
+
+		}
+
+		#pageTitle {
+			padding-top: 8px;
+			margin-left: 10px;
+			text-transform: uppercase;
+			font-size: 2rem;
+		}
+
+
+		h2 {
+			color: white;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+
+		}
+
+		#localWeatherDivx {
+			width: 100%;
+			height: 100%;
+		}
+
+		#mainWeatherIconBox {
+			text-align: center;
+			width: 40%;
+			height: 250px;
+			min-width: 130px;
+			margin-left: 5%;
+			margin-right: 0%px;
+			border-radius: 5px;
+			box-shadow: 5px 10px 10px #888888;
+			background-color: white;
+			opacity: 0.7;
+			color: black;
+			float: left;
+
+		}
+
+		#weatherBoxTitle {
+			margin-top: 5px;
+		}
+
+		#ShowMapDiv {
+			width: 40%;
+			height: 250px;
+			margin-left: 0%;
+			margin-right: 5%;
+			text-align: center;
+			float: right;
+			border-radius: 5px;
+			box-shadow: 5px 10px 10px #888888;
+			background-color: white;
+			opacity: 0.9;
+			color: white;
+
+		}
+		
+		#otherWeatherBox {
+			/* background-image: ; */
+            margin-top: -20px;
+			text-shadow: 2px 2px black;
+		}
+
+		input,
+		button {
+			border-radius: 5px;
+			margin-left: 5px;
+		}
+
+		#LocalWeatherData {
+			text-align: center;
+			color: white;
+			height: auto;
+
+		}
+
+		#thecity {
+			margin-top: 10px;
+			width: 260px;
+		}
+
+		#weatherColSection {
+			display: inline-block;
+			width: 100%;
+			white-space: nowrap;
+
+		}
+
+		#forcastArrowLeft {
+			position: relative;
+			display: inline-block;
+			width: 10%;
+			max-width: 10%;
+			float: left;
+			height: 197px;
+			background-color: lightgray;
+		}
+
+		#leftArrow {
+			width: 100px;
+			height: 101px;
+			position: absolute;
+			right: 0px;
+			vertical-align: middle;
+			top: 50%;
+			margin-top: -49px;
+			background-image: url("img/Earlier.jpg");
+			background-size: cover;
+		}
+
+		#leftArrow:hover {
+			background-image: url("img/Earlier_inv.jpg");
+			background-size: cover;
+		}
+
+		#forcastArrowRight {
+			position: relative;
+			display: inline-block;
+			width: 10%;
+			max-width: 10%;
+			float: right;
+			height: 197px;
+			background-color: lightgray;
+			border-left: solid grey 1px;
+		}
+
+		#rightArrow {
+			width: 100px;
+			height: 101px;
+			position: absolute;
+			left: 0px;
+			vertical-align: middle;
+			top: 50%;
+			margin-top: -49px;
+			margin-top: -49px;
+			background-image: url("img/later.jpg");
+			background-size: cover;
+		}
+
+		#rightArrow:hover {
+			background-image: url("img/later_inv.jpg");
+			background-size: cover;
+		}
+
+
+		#weatherColumns {
+			display: inline-block;
+			text-align: center;
+			max-width: 80%;
+			margin-left: 0px;
+			margin-right: 0px;
+			max-height: 300px;
+			font-size: 10px;
+			white-space: nowrap;
+			overflow-x: scroll;
+			overflow-y: hidden;
+			scroll-behavior: smooth;
+		}
+
+		.barDiv {
+			display: inline-block;
+			width: 100px;
+			height: 180px;
+			text-align: center;
+			font-size: 1rem;
+			white-space: normal;
+			border-left: solid grey 1px;
+			border-top: solid grey 1px;
+			/*            border-right: solid grey 1px;*/
+		}
+
+		hr {
+			margin: 5px;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/*     --------------------------------------------------------Media Queries-----------------------------------------------*/
+
+
+		@media only screen and (max-width: 930px) {
+			/* ipad */
+
+			#localWeatherFrame {
+
+				width: 90%;
+				height: auto;
+				padding-bottom: 20px;
+
+			}
+
+			#mainlanding {
+				height: auto;
+			}
+
+			#weatherBoxTitle {
+				margin-top: 5px;
+				font-size: 1.2rem;
+			}
+
+			#mainWeatherIconBox {
+				margin-left: 3%;
+				padding: 5px;
+				width: 90%;
+				float: none;
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 10px;
+			}
+
+			#ShowMapDiv {
+				width: 90%;
+				margin-right: 3%;
+				float: none;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				padding: 5px;
+			}
+		}
+/*
+			#weatherColumns {
+				max-width: 70%
+			}
+*/
+
+
+			/*			- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -*/
+
+			@media only screen and (max-width: 767px) {
+				/* smaller screens */
+
+				#forcastArrowRight {
+					width: 15%;
+					max-width: 15%
+				}
+
+			#forcastArrowLeft {
+				width: 15%;
+				max-width: 15%;
+			}
+
+
+			#leftArrow {
+				text-align: right;
+				background-image: url("img/earlier_slim.png");
+				background-size: contain;
+				background-repeat: no-repeat;
+				max-width: 100%;
+				width: 47px;
+				right: -1px;
+
+			}
+				
+						#leftArrow:hover {
+			background-image: url("img/earlier_slim_inv.png");
+				}
+
+			#rightArrow {
+				background-image: url("img/later_slim.png");
+				background-size: contain;
+				background-repeat: no-repeat;
+				max-width: 100%;
+				width: 47px;
+				left: 0px;
+			}
+				
+				#rightArrow:hover {
+			background-image: url("img/later_slim_inv.png");
+				}
+				
+			#weatherColumns {
+				max-width: 70%
+			}
+
+
+		}
+	</style>
+</head>
+
+<body onload="getLocation()">
+	<div id="mainlanding">
+		<nav>
+			<h2 id="pageTitle">Current Weather and Forecast Page</h2>
+		</nav>
+		<div id="localWeatherFrame">
+
+
+
+			<div id="mainWeatherIconBox">
+				<h4 id="weatherBoxTitle">The Weather where you are:</h4>
+				<div id="currentLocalWeather">
+
+				</div>
+			</div>
+
+			<div id="ShowMapDiv">
+				<input type="text" name="City" id="thecity" placeholder="Enter a city around the world">
+				<button type="button" id="btn1" onclick="otherWeather()">Get Weather!</button>
+				<div id="otherWeatherBox">
+
+
+				</div>
+			</div>
+
+			<div id="localWeatherDiv"></div>
+		</div>
+	</div>
+
+	<section id="weatherColSection">
+		<aside id="forcastArrowLeft">
+			<div id="leftArrow" onclick="scrollWinL()"></div>
+		</aside>
+
+		<div id="weatherColumns"></div>
+
+		<aside id="forcastArrowRight">
+			<div id="rightArrow" onclick="scrollWinR()"></div>
+		</aside>
+	</section>
+
+	<div id="bigLocalMap"></div>
+
+	<script>
+		alert('Click "OK" to Load Page');
+		var currentWeatherDiv = document.getElementById("currentLocalWeather");
+		var navAlert = document.getElementById("ShowMapDiv"); //Div for user location
+		var bigLocalMap = document.getElementById("bigLocalMap"); //Div for user location
+		var userLocation;
+
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+				navAlert.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
+
+		//showPosition(); //actually call this function
+		
+		function showPosition(position) {
+
+			userLocation = "lat=" + position.coords.latitude + "&" + "lon=" + position.coords.longitude; // Putting location into the openWeatherFormat
+
+			bigLocalMap.innerHTML = "<iframe width='100%' height='500px' src='https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&" + userLocation + "&zoom=100'></iframe>";
+
+			weatherForecast(userLocation); //UserLocation passed into weatherForecast
+
+			currentWeather(userLocation); //UserLocation passed into currentWeather
+
+		}
+
+		//- - - - -CURRENT WEATHER NOT FORECAST- - - - -
+
+		function currentWeather(CUL) {
+			//GET City Value from user
+			//    cityval = document.getElementById('thecity').value;
+
+			htmldata1 = "https://api.openweathermap.org/data/2.5/weather?" + CUL + "&APPID=334d7120dcf3d442e2a0a5c857bad3c8&units=metric";
+
+			//SEND Ajax 
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					var infoCurrent = JSON.parse(xhttp.responseText);
+
+					document.getElementById("localWeatherFrame").style = "background-Image:url('./img/" + infoCurrent.weather[0].main + ".jpg')";
+					document.getElementById("mainlanding").style = "background-Image:url('./img/" + infoCurrent.weather[0].main + ".jpg')";
+					currentWeatherDiv.innerHTML = "<img height=100px src='https://openweathermap.org/img/wn/" + infoCurrent.weather[0].icon + "@2x.png'><br>" + " \"" +
+						infoCurrent.weather[0].description + "\" <br>" + "City/Town: " + infoCurrent.name + "<br>" + "Country: " + infoCurrent.sys.country + "<br>" + "Latest Temperature: " + infoCurrent.main.temp + " &#8451 </div>";
+				}
+			};
+			xhttp.open("GET", htmldata1, true);
+			xhttp.send();
+		}
+
+		//        - - - - - -Weather somehwere else- - - - -
+
+		function otherWeather() {
+
+			cityval = document.getElementById('thecity').value;
+
+			htmldata2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityval + "&APPID=334d7120dcf3d442e2a0a5c857bad3c8&units=metric";
+
+			//SEND Ajax 
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					var infoOther = JSON.parse(xhttp.responseText);
+
+					navAlert.style = "background-Image:url('./img/" + infoOther.weather[0].main + ".jpg')";
+
+					document.getElementById('otherWeatherBox').innerHTML = "<img height=100px src='https://openweathermap.org/img/wn/" + infoOther.weather[0].icon + "@2x.png'><br>" + " \"" +
+						infoOther.weather[0].description + "\" <br>" + "City/Town: " + infoOther.name + "<br>" + "Country: " + infoOther.sys.country + "<br>" + "Latest Temperature: " + infoOther.main.temp + " &#8451 </div>";
+				}
+			};
+			xhttp.open("GET", htmldata2, true);
+			xhttp.send();
+		}
+		//    - - - - - FORECAST NOT CURRENT - - - - -
+
+		function weatherForecast(UserLoc) {
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var info = JSON.parse(this.response);
+
+					//                    document.getElementById("demo8").innerHTML = "Amount of forecast sessions: " + info.list.length;
+
+					var text = "";
+					var i;
+
+					for (i = 0; i < info.list.length; i++) {
+
+						function dts3() {
+							dts = new Date((info.list[i].dt) * 1000);
+							cleanerDate = dts.toDateString();
+							return cleanerDate;
+						}
+
+						function dts4() {
+							dts = new Date((info.list[i].dt) * 1000);
+							timeOnly = dts.toLocaleTimeString();
+							return timeOnly;
+						}
+						//                        (info.list[i].dt)*1000
+						text += "<div class='barDiv'><div>" + dts3() + "<br>" + dts4() + "</div>" +
+							"<div><img height=60px src='https://openweathermap.org/img/wn/" + info.list[i].weather[0].icon + "@2x.png'></div><div>" +
+							parseFloat(info.list[i].main.temp - 273.15).toFixed(2) + "&#8451</div></div>";
+
+						//                         "<div>" + info.list[i].weather[0].description + "</div>"
+					}
+					document.getElementById("weatherColumns").innerHTML = text;
+
+				}
+			};
+
+			xhttp.open("GET", "https://api.openweathermap.org/data/2.5/forecast?" + UserLoc + "&cnt=20&appid=334d7120dcf3d442e2a0a5c857bad3c8", true);
+			xhttp.send();
+		}
+
+		function scrollWinR() {
+			document.getElementById("weatherColumns").scrollBy(300, 0);
+		}
+
+		function scrollWinL() {
+			document.getElementById("weatherColumns").scrollBy(-300, 0);
+		}
+
+	</script>
+
+</body></html>
+
+
+
